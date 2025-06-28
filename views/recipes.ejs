@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe List</title>
+</head>
+<body>
+  <h1>Recipe List</h1>
+  <ul>
+    <% meals.forEach(function(meal) { %>
+      <li>
+        <h2><%= meal.strMeal %></h2>
+        <img src="<%= meal.strMealThumb %>" alt="<%= meal.strMeal %>" width="200">
+        <p>Meal ID: <%= meal.idMeal %></p>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>
