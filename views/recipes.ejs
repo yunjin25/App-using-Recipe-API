@@ -1,20 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe List</title>
-</head>
-<body>
-  <h1>Recipe List</h1>
-  <ul>
-    <% meals.forEach(function(meal) { %>
-      <li>
-        <h2><%= meal.strMeal %></h2>
-        <img src="<%= meal.strMealThumb %>" alt="<%= meal.strMeal %>" width="200">
-        <p>Meal ID: <%= meal.idMeal %></p>
-      </li>
-    <% }); %>
-  </ul>
-</body>
+<html>
+  <head>
+    <title>Meal Finder</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+        background-color: #ffffff;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        padding: 8px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+      button {
+        padding: 8px 12px;
+        margin-left: 8px;
+        border: none;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f5f0e6; /* 연한 베이지색 */
+      }
+      .card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+      .meal-name {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Meal Finder</h1>
+
+    <form action="/recipes" method="get">
+      <input
+        type="text"
+        name="ingredient"
+        placeholder="Enter an ingredient (e.g. beef, egg)"
+        value="<%= ingredient %>"
+      >
+      <button type="submit">Search</button>
+    </form>
+
+    <h3>Main Ingredient: <%= ingredient %></h3>
+
+    <% if (meals && meals.length > 0) { %>
+      <% meals.forEach(meal => { %>
+        <div class="card">
+          <div class="meal-name"><%= meal.strMeal %></div>
+          <img src="<%= meal.strMealThumb %>" alt="meal image">
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No meals found for this ingredient.</p>
+    <% } %>
+  </body>
 </html>
